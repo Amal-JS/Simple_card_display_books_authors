@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/fddbd64592.js" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+
+<style>
+
+  
+</style>
+
+
+</head>
+
+</head>
+
+
+</head>
+<body>
+
+
+<div class="container-fluid">
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+    </div>
+
+
+<div class="container">
+
+
+    <div class="row">
+        <div class="col-10">
+
+        </div>
+        <div class="col-2">
+
+<div class="input-group mb-3 d-flex justify-content-center align-items-center" style="background: #6c757d;">
+  <div class="input-group-prepend">
+    <label class="input-group-text" style="background-color: #6c757d;color:white;border:none;" inputGroupSelect01"><i class="fa-solid fa-bars-filter"></i></label>
+  </div>
+  
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      By Book Name
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="{% url 'index' 'book_name' %}">Book Name</a>
+      <a class="dropdown-item" href="{% url 'index' 'price' %}">Price</a>
+      <a class="dropdown-item" href="{% url 'index' 'release_date' %}">Release Date</a>
+    </div>
+  </div>
+</div>
+
+        </div>
+    </div>
+    <div class="row m-5 p-3">
+
+    
+
+        {% for book in page_obj%}
+
+        <div class="col-4">
+
+            <div class="card m-4 p-3 d-flex justify-content-center align-items-center text-center"
+                 style="height:25rem;">
+                <img class="card-img-top w-75 h-50 rounded " src="{{book.book_image.url}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{book.book_name}}</h5>
+
+                    <div class="d-flex my-2">
+                        <p class="card-text w-50">Genre :</p>
+                        <p class="card-text w-50 text-left">{{ book.genre.all|join:", " }}</p>
+                    </div>
+
+
+                    <p class="card-text">Author : {{book.author}}</p>
+                    <a href="{% url 'single_book' book.id %}" class="btn btn-primary">Check it </a>
+                </div>
+            </div>
+
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+<!-- bootstrap pagination -->
+<nav aria-label="Page navigation example my-2 bg-dark">
+    <ul class="pagination d-flex justify-content-center ">
+        {% if page_obj.has_previous %}
+
+        <li class="page-item mx-2 " >
+            <a class="page-link pg_links" href="?page=1" aria-label="Previous" >
+
+                &laquo; 1
+                
+            </a>
+        </li>
+
+        <li class="page-item mx-2 ">
+            <a class="page-link pg_links" href="?page={{ page_obj.previous_page_number }}">
+
+
+                Previous
+            </a>
+
+
+        </li>
+        
+        {% endif %}
+        <li class="page-item mx-2"><a class="page-link " >{{ page_obj.number }}</a></li>
+        
+
+            {% if page_obj.has_next %}
+            <li class="page-item mx-2">
+            <a class="page-link pg_links"  href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+
+                
+                Next
+
+            </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link pg_links"  href="?page={{ page_obj.paginator.num_pages }}">
+
+               
+                Last &raquo;
+            </a>
+
+
+        </li>
+
+
+        {% endif %}
+    </ul>
+    <p id="last_p"></p>
+</nav>
+
+<script>
+const pg_links=document.querySelectorAll(".page_link")
+pg_links.forEach(value=>{
+  value.style.background = "";
+  value.style.borderRadius = "10px" ;
+
+});
+
+
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{obj}}</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+            crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row m-5 p-3 d-flex justify-content-center align-items-center">
+
+
+
+        <div class="col-12">
+    {% if obj.book_name %}
+          <div class="card m-4 p-3 d-flex justify-content-center align-items-center text-center" style="height:50rem;">
+  <img class="card-img-top w-75 h-50 rounded " style="height:400px" src="{{obj.book_image.url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{obj.book_name}}</h5>
+
+      <div class="d-flex my-3 justify-content-center">
+         <p class="card-text mx-2">Genre :</p>
+          <p class="card-text  text-left">{{ obj.genre.all|join:", " }}</p>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center">
+
+          <p class="card-text m-4">Author :</p><a  style="text-decoration:None;" href="{% url 'single_author' obj.author.id %}">
+          <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="click to get more details about author">
+  {{obj.author}}
+</button>
+          </a>
+
+      </div>
+
+
+      <p class="card-text m-4">Price : {{obj.price}} Rs</p>
+
+      <p class="card-text m-4">Description : {{obj.description}}</p>
+
+
+       </div>
+</div>
+
+      {% else %}
+
+
+      <div class="card m-4 p-3 d-flex justify-content-center align-items-center text-center" style="height:60rem;">
+  <img class="card-img-top w-75  rounded " style="height:500px" src="{{obj.author_image.url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">Name : {{obj.author_name}}</h5>
+
+      <p class="card-text m-4">Age : {{obj.age}}</p>
+
+      <p class="card-text m-4">DOB : {{obj.dob}}</p>
+
+      <p class="card-text m-4">Number of awards : {{obj.no_of_awards}} </p>
+
+      <p class="card-text m-4">Description : {{obj.description}}</p>
+
+
+       </div>
+</div>
+
+
+
+      {% endif %}
+
+
+
+
+
+
+</div>
+
+
+
+
+
+    </div>
+</div>
+
+
+</body>
+</html>
